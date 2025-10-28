@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Images\icons8-выбор-67.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Images\icons8-выбор-32.png" />
+      <Resource Include="Images\icons8-выбор-32.png" />
+      <None Remove="Images\icons8-карандаш-24.png" />
+      <Resource Include="Images\icons8-карандаш-24.png" />
+      <None Remove="Images\icons8-ведро-краски-24.png" />
+      <Resource Include="Images\icons8-ведро-краски-24.png" />
+      <None Remove="Images\icons8-ластик-24.png" />
+      <Resource Include="Images\icons8-ластик-24.png" />
+      <None Remove="Images\icons8-лупа-24.png" />
+      <Resource Include="Images\icons8-лупа-24.png" />
+      <None Remove="Images\icons8-пипетка-24.png" />
+      <Resource Include="Images\icons8-пипетка-24.png" />
+      <None Remove="Images\icons8-текст-24.png" />
+      <Resource Include="Images\icons8-текст-24.png" />
+      <None Remove="Images\icons8-многоугольник-25.png" />
+      <Resource Include="Images\icons8-многоугольник-25.png" />
+      <None Remove="Images\icons8-прямоугольник-25.png" />
+      <Resource Include="Images\icons8-прямоугольник-25.png" />
+      <None Remove="Images\icons8-эллипс-25.png" />
+      <Resource Include="Images\icons8-эллипс-25.png" />
+      <None Remove="Images\icons8-линия-25.png" />
+      <Resource Include="Images\icons8-линия-25.png" />
+    </ItemGroup>
+
+</Project>

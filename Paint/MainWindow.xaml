@@ -148,7 +148,7 @@
                                         </Button>
                                         <Button Grid.Column="1" Grid.Row="0"
                                                 Width="25" Height="25"
-                                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" Background="Transparent">
+                                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" Background="Transparent" Click="EllipseButton_Click">
                                                 <Image Source="Images/icons8-эллипс-25.png"></Image>
                                         </Button>
     

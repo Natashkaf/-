@@ -35,6 +35,8 @@
       <Resource Include="Images\icons8-эллипс-25.png" />
       <None Remove="Images\icons8-линия-25.png" />
       <Resource Include="Images\icons8-линия-25.png" />
+      <None Remove="Images\icons8-кисть-40.png" />
+      <Resource Include="Images\icons8-кисть-40.png" />
     </ItemGroup>
 
 </Project>

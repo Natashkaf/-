@@ -160,7 +160,7 @@
                                         </Button>
                                         <Button Grid.Column="1" Grid.Row="1"
                                                 Width="25" Height="25"
-                                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" Background="Transparent">
+                                                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" Background="Transparent" Click="PolygonButton_Click">
                                                 <Image Source="Images/icons8-многоугольник-25.png"></Image>
                                         </Button>
     

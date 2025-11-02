@@ -15,7 +15,8 @@ namespace Paint
         Rectangle, 
         Line, 
         Ellipse, 
-        Polygon
+        Polygon,
+        Fill
     }
 
     public class ToolController
@@ -23,6 +24,7 @@ namespace Paint
         private DrawingTemplate currentDrawing;
         private bool isDrawing = false;
         private Canvas currentCanvas;
+        private Filling _filling = new Filling();
 
         public ToolType CurrentTool { get; set; } = ToolType.Brush;
         public Color CurrentColor { get; set; } = Colors.Black;
@@ -39,6 +41,12 @@ namespace Paint
             if (CurrentTool == ToolType.Polygon)
             {
                 HandlePolygonMouseDown(point, canvas);
+                return;
+            }
+//если заливка - тоже все пропускаем, для нее свой обработчик в ее классе 
+            if (CurrentTool == ToolType.Fill)
+            {
+               _filling.HandleFillingMouseDown(point, canvas, CurrentColor);
                 return;
             }
             // иначе, начинаем рисовать, настраиваем фигуру, запускаем метод рисования фигуры, добавляем ее на холст
@@ -136,6 +144,7 @@ namespace Paint
                 _ => ShapeThickness
             };
         }
+        
         
     }
 }

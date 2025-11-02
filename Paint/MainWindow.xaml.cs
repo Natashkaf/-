@@ -50,7 +50,7 @@ public partial class MainWindow : Window
         toolController.CurrentTool = ToolType.Line;
         this.Cursor = Cursors.Cross;
     }
-// обработчик кнопки линии
+// обработчик кнопки эллипса
     private void EllipseButton_Click(object sender, RoutedEventArgs e)
     {
         toolController.CurrentTool = ToolType.Ellipse;
@@ -60,6 +60,12 @@ public partial class MainWindow : Window
     private void PolygonButton_Click(object sender, RoutedEventArgs e)
     {
         toolController.CurrentTool = ToolType.Polygon;
+    }
+// обработчик кнопки заливки 
+    private void ButtonFilling_click(object sender, RoutedEventArgs e)
+    {
+        toolController.CurrentTool = ToolType.Fill;
+        this.Cursor = Cursors.Cross;
     }
 // обработчик нажатия мыши, только передает что где нажато и особая проверка для многоугольника 
     private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)

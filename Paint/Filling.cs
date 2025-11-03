@@ -7,19 +7,40 @@ namespace Paint;
 
 public class Filling
 {
-    // обработка заливки, если жмем внутри фигуры - запускаем метод заливки фигуры, иначе, заливаем весь холст
+    // обработка заливки, если жмем внутри фигуры - запускаем метод заливки фигуры, если жмем по обводке - меняем цвет обводки, иначе  заливаем весь холст
     public void HandleFillingMouseDown(Point point, Canvas canvas, Color color)
     {
         var figure = FindFigurePoint(canvas, point);
+        var stroke = FindStrokePoint(canvas, point);
         if (figure != null)
         {
             ApplyFillFigure(figure, color);
+            return;
+        }
+
+        if (stroke != null)
+        {
+            ApplyColorStroke(stroke, color);
+            return;
         }
         else
         {
             FillingCanvas(canvas, point, color);
         }
 
+    }
+// меняем цвет обводки 
+    private FrameworkElement FindStrokePoint(Canvas canvas, Point point)
+    {
+        for (int i = canvas.Children.Count - 1; i >= 0; i--)
+        {
+            var element = canvas.Children[i] as Shape;
+            if (element != null && IsPointStroke(element, point))
+            {
+                return element;
+            }
+        }
+        return null;
     }
 //меняем цвет всего холста 
     private void FillingCanvas(Canvas canvas, Point point, Color color)
@@ -31,31 +52,51 @@ public class Filling
     {
         for (int i = canvas.Children.Count - 1; i >= 0; i--)
         {
-            var figure = canvas.Children[i] as FrameworkElement;
-            if (figure != null && IsPointInFigure(figure, point))
+            var element = canvas.Children[i] as Shape;
+            if (element != null && IsPointInFigure(element, point))
             {
-                return figure;
+                return element;
             }
         }
         return null;
     }
-// проверка, что точка внутри фигуры: нашли координаты фигуры, если они есть, то создаем прямоугольник, с координатами и размером фигуры, и проверяем, в нем ли точка 
-    private bool IsPointInFigure(FrameworkElement figure, Point point)
+// проверяем, нажали ли на обводку 
+    private bool IsPointStroke(Shape shape, Point point)
     {
-        double left = Canvas.GetLeft(figure);
-        double top = Canvas.GetTop(figure);
-        if (double.IsNaN(left))
-        {
-            left = 0;
-        }
+        double left = Canvas.GetLeft(shape);
+        double top = Canvas.GetTop(shape);
+        if (double.IsNaN(left)) left = 0;
+        if (double.IsNaN(top)) top = 0;
+        
+        Point relativePoint = new Point(point.X - left, point.Y - top);
+        
+        Geometry geometry = GetShapeGeometry(shape);
+        Pen pen = new Pen(shape.Stroke, shape.StrokeThickness);
+        
+        return geometry.StrokeContains(pen, relativePoint);
+    }
+// проверка, что точка внутри фигуры: нашли координаты фигуры, если они есть, то создаем прямоугольник, с координатами и размером фигуры, и проверяем, в нем ли точка 
+    private bool IsPointInFigure(Shape shape, Point point)
+    {
+        double left = Canvas.GetLeft(shape);
+        double top = Canvas.GetTop(shape);
+        if (double.IsNaN(left)) left = 0;
+        if (double.IsNaN(top)) top = 0;
+        
+        Point relativePoint = new Point(point.X - left, point.Y - top);
+        
+        Geometry geometry = GetShapeGeometry(shape);
+        Pen pen = new Pen(shape.Stroke, shape.StrokeThickness);
+        
+        // Точка в заливке И НЕ на обводке
+        return geometry.FillContains(relativePoint) && 
+               !geometry.StrokeContains(pen, relativePoint);
 
-        if (double.IsNaN(top))
-        {
-            top = 0;
-        }
-        var bounds = new  Rect(left, top, figure.ActualWidth, figure.ActualHeight);
-        return bounds.Contains(point);
-
+    }
+    //получаем математичкое представление фигуры
+    private Geometry GetShapeGeometry(Shape shape)
+    {
+        return shape.RenderedGeometry;
     }
 // заливка фигур, где можно залить - заливаем, где нет - меняем цвет
     private void ApplyFillFigure(FrameworkElement element, Color color)
@@ -85,4 +126,12 @@ public class Filling
             line.Stroke = brush;
         }
     }
+    // заливаем обводку цветом 
+        private void ApplyColorStroke(FrameworkElement element, Color color)
+        {
+            if (element is Shape shape)
+            {
+                shape.Stroke = new SolidColorBrush(color);
+            }
+        }
 }

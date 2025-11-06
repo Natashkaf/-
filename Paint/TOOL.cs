@@ -9,7 +9,7 @@ namespace Paint
 {
     // просто список всего, что можно нарисовать
     public enum ToolType
-    {
+    {  Selection,
         Pencil, 
         Brush, 
         Rectangle, 
@@ -25,17 +25,27 @@ namespace Paint
         private bool isDrawing = false;
         private Canvas currentCanvas;
         private Filling _filling = new Filling();
+        private SelectionController _selectionController; 
 
         public ToolType CurrentTool { get; set; } = ToolType.Brush;
         public Color CurrentColor { get; set; } = Colors.Black;
         public double PencilThickness { get; set; } = 1;
         public double BrushThickness { get; set; } = 5;
         public double ShapeThickness { get; set; } = 2;
+        public void SetSelectionController(SelectionController selectionController)
+        {
+            _selectionController = selectionController;
+        }
 
         //обработка нажатия мыши на кнопку рисования какой-либо фигуры
         public void HandleMouseDown(Point point, Canvas canvas)
         {
             currentCanvas = canvas;
+            if (CurrentTool == ToolType.Selection && _selectionController != null)
+            {
+                _selectionController.HandleMouseDown(point);
+                return;
+            }
             // если рисуем многоугольник - пропускаем всё, он особенный, для него свой обработчик 
 
             if (CurrentTool == ToolType.Polygon)
@@ -94,6 +104,11 @@ namespace Paint
 // обработка движения мыши при рисовании
         public void HandleMouseMove(Point point)
         {
+            if (CurrentTool == ToolType.Selection && _selectionController != null)
+            {
+                _selectionController.HandleMouseMove(point);
+                return;
+            }
             if (!isDrawing || currentDrawing == null) return;
 // если рисуем, то постоянно перерисовываем фигуру, относительно новой позиции курсора
             currentDrawing.CurrentPoint = point;
@@ -102,6 +117,11 @@ namespace Paint
 // обработчик отпускания кнопки мыши
         public void HandleMouseUp()
         {
+            if (CurrentTool == ToolType.Selection && _selectionController != null)
+            {
+                _selectionController.HandleMouseUp();
+                return;
+            }
             // если не многоугольник, то заканчиваем рисовать 
             if (!isDrawing || CurrentTool == ToolType.Polygon) return;
 

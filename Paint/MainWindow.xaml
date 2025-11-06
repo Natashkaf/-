@@ -28,6 +28,7 @@
                                                 Width="40"
                                                 Height="40"
                                                 Background="Transparent"
+                                                Click="SelectionButton_Click"
                                                 >
                                              <Image Source="/Images/icons8-выбор-32.png" Width="32" Height="32"/>  
                                         </Button>

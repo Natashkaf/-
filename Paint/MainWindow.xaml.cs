@@ -11,6 +11,8 @@ public partial class MainWindow : Window
 {
     private ToolController toolController = new ToolController();
     private SelectionController selectionController;
+    private DeletionController deletionController;
+
 
     public MainWindow()
     {
@@ -18,6 +20,8 @@ public partial class MainWindow : Window
         toolController.CurrentTool = ToolType.Brush;
         selectionController = new SelectionController(mainCanvas);
         toolController.SetSelectionController(selectionController);
+        deletionController = new DeletionController(mainCanvas, selectionController);
+
         this.Cursor = Cursors.Cross;
     }
 // обрабочик смены цвета 
@@ -103,7 +107,12 @@ public partial class MainWindow : Window
 
         // Включаем режим выделения
         selectionController.SetSelectionMode(true);
-    }
+    }    
+    // обработчик кнопки удаления
+    private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+    {
+        deletionController.DeleteSelectedShape();
+         }
 
 // обработчик нажатия мыши, только передает что где нажато и особая проверка для многоугольника 
     private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -188,5 +197,7 @@ public partial class MainWindow : Window
             toolController.HandleMouseUp();
         }
     }
+
+
 }
 }

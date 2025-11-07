@@ -73,8 +73,9 @@
                                         <!-- Вторая строка инструментов  -->
                                         <Button Grid.Column="0" Grid.Row="1" Width="24" Height="24"
                                                 HorizontalAlignment="Left" 
-                                                VerticalAlignment="Top" Margin="2" Background="Transparent">
-                                                <Image Source="Images/icons8-ластик-24.png"></Image>
+                                                VerticalAlignment="Top" Margin="2" Background="Transparent"
+                                                Click="ButtonDelete_Click">
+                                                <Image Source="Images/icons8-удалить-24.png"></Image>
                                         </Button>
                                         <Button Grid.Column="1" Grid.Row="1" Width="24" Height="24"
                                                 HorizontalAlignment="Center"
@@ -236,6 +237,7 @@
                    FontWeight="Bold" 
                    Margin="0,8,0,0"/>
     </Grid>
+        
 </Border>
                 </StackPanel>
                 <Grid Grid.Row="1">

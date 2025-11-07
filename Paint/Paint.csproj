@@ -20,7 +20,6 @@
       <None Remove="Images\icons8-ведро-краски-24.png" />
       <Resource Include="Images\icons8-ведро-краски-24.png" />
       <None Remove="Images\icons8-ластик-24.png" />
-      <Resource Include="Images\icons8-ластик-24.png" />
       <None Remove="Images\icons8-лупа-24.png" />
       <Resource Include="Images\icons8-лупа-24.png" />
       <None Remove="Images\icons8-пипетка-24.png" />
@@ -37,6 +36,8 @@
       <Resource Include="Images\icons8-линия-25.png" />
       <None Remove="Images\icons8-кисть-40.png" />
       <Resource Include="Images\icons8-кисть-40.png" />
+      <None Remove="Images\icons8-удалить-24.png" />
+      <Resource Include="Images\icons8-удалить-24.png" />
     </ItemGroup>
 
 </Project>

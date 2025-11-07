@@ -179,7 +179,7 @@ namespace Paint
             ShowSelectionVisuals();
         }
 // снимает выделение с фигуры
-        private void ClearSelection()
+        public void ClearSelection()
         {
             // убираем визуал выделения
             HideSelectionVisuals();
@@ -904,6 +904,12 @@ namespace Paint
                 _ => Cursors.Arrow
             };
         }
+        // возвращает выделенный элемент(надо для класса удаления)
+        public FrameworkElement GetSelectedElement()
+        {
+            return selectedElement;
+        }
+
     }
 // список всех квадратиков 
     public enum ResizeHandle

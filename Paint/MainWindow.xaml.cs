@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Collections.Generic;
+using Microsoft.Win32;
 
 namespace Paint
 {
@@ -27,6 +28,7 @@ public partial class MainWindow : Window
         _cancelReturnManager = new CancelReturnManager(mainCanvas);
         toolController.SetCancelReturnManager(_cancelReturnManager); 
         this.Cursor = Cursors.Cross;
+        
     }
 // обрабочик смены цвета 
     private void ColorButton_Click(object sender, RoutedEventArgs e)
@@ -138,6 +140,11 @@ public partial class MainWindow : Window
         _cancelReturnManager.Redo();
         
     }
+    //обработчик кнопки сохранить
+    private void ButtonSave_Click(object sender, RoutedEventArgs e)
+    {
+        PngSave.ExportCanvasToPng(mainCanvas); 
+    }
 
 // обработчик нажатия мыши, только передает что где нажато и особая проверка для многоугольника 
     private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -222,6 +229,7 @@ public partial class MainWindow : Window
             toolController.HandleMouseUp();
         }
     }
+
 
 
 }

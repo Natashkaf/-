@@ -42,6 +42,8 @@
       <Resource Include="Images\icons8-стрелка-влево-35.png" />
       <None Remove="Images\icons8-стрелка-вправо-в-круге-2-35.png" />
       <Resource Include="Images\icons8-стрелка-вправо-в-круге-2-35.png" />
+      <None Remove="Images\icons8-сохранить-24.png" />
+      <Resource Include="Images\icons8-сохранить-24.png" />
     </ItemGroup>
 
 </Project>

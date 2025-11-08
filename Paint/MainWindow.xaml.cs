@@ -12,7 +12,7 @@ public partial class MainWindow : Window
     private ToolController toolController = new ToolController();
     private SelectionController selectionController;
     private DeletionController deletionController;
-
+    private ZoomController zoomController;
 
     public MainWindow()
     {
@@ -21,7 +21,8 @@ public partial class MainWindow : Window
         selectionController = new SelectionController(mainCanvas);
         toolController.SetSelectionController(selectionController);
         deletionController = new DeletionController(mainCanvas, selectionController);
-
+        deletionController = new DeletionController(mainCanvas, selectionController);
+        zoomController = new ZoomController(mainCanvas);
         this.Cursor = Cursors.Cross;
     }
 // обрабочик смены цвета 
@@ -113,6 +114,16 @@ public partial class MainWindow : Window
     {
         deletionController.DeleteSelectedShape();
          }
+    //обработчик кнопки сброса зумирования
+    private void ZoomButton_Click(object sender, RoutedEventArgs e)
+    {
+        zoomController.ResetZoom();
+    }
+    // обработчик колесика мыши 
+    private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        zoomController.HandleMouseWheel(e, mainScrollViewer);
+    }
 
 // обработчик нажатия мыши, только передает что где нажато и особая проверка для многоугольника 
     private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)

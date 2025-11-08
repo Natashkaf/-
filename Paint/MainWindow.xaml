@@ -240,6 +240,42 @@
     </Grid>
         
 </Border>
+                        <!-- разделитель-->
+                        <Border Background="Gray" Width="0.5" Margin="5,10" VerticalAlignment="Center" Height="80"/>
+                        <!-- 🆕 Блок "Отмена / Повтор действия" -->
+                        <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="3" Margin="2" Padding="8">
+                                <Grid>
+                                        <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                                                <!-- Кнопка Отмена -->
+                                                <Button Width="35" Height="35"
+                                                        Background="Transparent"
+                                                        Margin="5"
+                                                        ToolTip="Отменить (Ctrl+Z)"
+                                                        Click="ButtonCancel_Click">
+                                                        <Image Source="/Images/icons8-стрелка-влево-35.png"/>
+                                                </Button>
+
+                                                <!-- Кнопка Повтор -->
+                                                <Button Width="35" Height="35"
+                                                        Background="Transparent"
+                                                        Margin="5"
+                                                        ToolTip="Вернуть (Ctrl+Y)"
+                                                        Click="ButtonReturn_Click">
+                                                        <Image Source="/Images/icons8-стрелка-вправо-в-круге-2-35.png"/>
+                                                </Button>
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Row="1" Text="Отменить/Вернуть" 
+                                                   HorizontalAlignment="Center"
+                                                   FontWeight="Bold" Margin="0,9,0,0"/>
+                                </Grid>
+                        </Border>
+                        
                 </StackPanel>
                 <Grid Grid.Row="1">
                         <ScrollViewer x:Name="mainScrollViewer" PreviewMouseWheel="Canvas_MouseWheel"

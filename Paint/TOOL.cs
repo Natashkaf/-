@@ -26,6 +26,7 @@ namespace Paint
         private Canvas currentCanvas;
         private Filling _filling = new Filling();
         private SelectionController _selectionController; 
+        private CancelReturnManager _cancelReturnManager;
 
         public ToolType CurrentTool { get; set; } = ToolType.Brush;
         public Color CurrentColor { get; set; } = Colors.Black;
@@ -35,6 +36,11 @@ namespace Paint
         public void SetSelectionController(SelectionController selectionController)
         {
             _selectionController = selectionController;
+        }
+        //связывает этот класс с классом CancelReturnManager
+        public void SetCancelReturnManager(CancelReturnManager manager)
+        {
+            _cancelReturnManager = manager;
         }
 
         //обработка нажатия мыши на кнопку рисования какой-либо фигуры
@@ -127,6 +133,7 @@ namespace Paint
 
             isDrawing = false;
             currentDrawing?.EndDrawing();
+            _cancelReturnManager?.SaveState();
             currentDrawing = null;
         }
 
@@ -137,6 +144,7 @@ namespace Paint
             {
                 polygon.CompletePolygon();
                 isDrawing = false;
+                _cancelReturnManager?.SaveState();
                 currentDrawing = null;
             }
         }

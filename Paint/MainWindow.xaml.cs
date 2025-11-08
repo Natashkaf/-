@@ -13,6 +13,7 @@ public partial class MainWindow : Window
     private SelectionController selectionController;
     private DeletionController deletionController;
     private ZoomController zoomController;
+    private CancelReturnManager _cancelReturnManager;
 
     public MainWindow()
     {
@@ -23,6 +24,8 @@ public partial class MainWindow : Window
         deletionController = new DeletionController(mainCanvas, selectionController);
         deletionController = new DeletionController(mainCanvas, selectionController);
         zoomController = new ZoomController(mainCanvas);
+        _cancelReturnManager = new CancelReturnManager(mainCanvas);
+        toolController.SetCancelReturnManager(_cancelReturnManager); 
         this.Cursor = Cursors.Cross;
     }
 // обрабочик смены цвета 
@@ -123,6 +126,17 @@ public partial class MainWindow : Window
     private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
     {
         zoomController.HandleMouseWheel(e, mainScrollViewer);
+    }
+// обработчик кнопки "отменить" (стрелочка влево)
+    private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+    {
+        _cancelReturnManager.Undo();
+    }
+// обработчик кнопки "вернуть" (стрелочка вправо)
+    private void ButtonReturn_Click(object sender, RoutedEventArgs e)
+    {
+        _cancelReturnManager.Redo();
+        
     }
 
 // обработчик нажатия мыши, только передает что где нажато и особая проверка для многоугольника 

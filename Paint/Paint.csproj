@@ -38,6 +38,10 @@
       <Resource Include="Images\icons8-кисть-40.png" />
       <None Remove="Images\icons8-удалить-24.png" />
       <Resource Include="Images\icons8-удалить-24.png" />
+      <None Remove="Images\icons8-стрелка-влево-35.png" />
+      <Resource Include="Images\icons8-стрелка-влево-35.png" />
+      <None Remove="Images\icons8-стрелка-вправо-в-круге-2-35.png" />
+      <Resource Include="Images\icons8-стрелка-вправо-в-круге-2-35.png" />
     </ItemGroup>
 
 </Project>
